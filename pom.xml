@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.fpl.dev</groupId>
+	<artifactId>cadastro</artifactId>
+	<version>0.1</version>
+	<packaging>war</packaging>
+	<name>Cadastro</name>
+	<description>Cadastro completo com validações</description>
+
+	<properties>
+	
+		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+
+		<!-- jsf properties -->
+		<jsf.group>com.sun.faces</jsf.group>
+		<jsf.version>2.2.14</jsf.version>
+	</properties>
+
+	<repositories>
+	</repositories>
+
+	<dependencies>
+	
+		<!-- jsf-api -->
+		<dependency>
+			<groupId>${jsf.group}</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>${jsf.version}</version>
+		</dependency>
+
+		<!-- jsf-impl -->
+		<dependency>
+			<groupId>${jsf.group}</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>${jsf.version}</version>
+		</dependency>
+
+		<!-- javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.0-b05</version>
+			<scope>provided</scope>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<finalName>cadastro</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
