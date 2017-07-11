@@ -1,85 +1,194 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 </h:head>
- 
-<h:body> 
-	<h:form>
-		<h:panelGrid columns="2">
-		
-			<h:outputLabel value="Nome Completo:" for="nome" />
-			<h:inputText value="" id="nome" />
-			
-			<h:outputLabel value="Cidade:" for="cidade" />
-			<h:inputText value="" id="cidade" />
-			
-			<h:outputLabel value="Estado:" for="estado" />
-			<h:selectOneMenu value="" id="estado">
-				<f:selectItem itemLabel="Selecione o estado" itemValue=""/>
-				<f:selectItem itemLabel="Ceará" itemValue="CE"/>
-				<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ"/>
-				<f:selectItem itemLabel="São Paulo" itemValue="SP"/>
-			</h:selectOneMenu>
-			
-			<h:outputLabel value="Nascimento:" for="nascimento" />
-			<h:inputText value="" id="nascimento" />
-			
-			<h:outputLabel value="Sexo:" for="sexo" />
-			<h:selectOneRadio value="m" id="sexo">
-				<f:selectItem itemLabel="Masculino" itemValue="m"/>
-				<f:selectItem itemLabel="Feminino" itemValue="f"/>
-			</h:selectOneRadio>
-			
-			<h:outputLabel value="Estado Civil:" for="estadoCivil" />
-			<h:selectOneMenu value="" id="estadoCivil">
-				<f:selectItem itemLabel="Selecione o estado civil" itemValue=""/>
-				<f:selectItem itemLabel="Solteiro(a)" itemValue="1"/>
-				<f:selectItem itemLabel="Casado(a)" itemValue="2"/>
-				<f:selectItem itemLabel="União Estável" itemValue="3"/>
-				<f:selectItem itemLabel="Divorciado(a)" itemValue="4"/>
-				<f:selectItem itemLabel="Viúvo(a)" itemValue="5"/>
-			</h:selectOneMenu>
-			
-			<h:outputLabel value="Telefone:" for="telefone" />
-			<h:panelGrid id="telefone" columns="2" cellspacing="0" cellpadding="0" >
-				<h:inputText value="" id="ddd" size="1" maxlength="2" style="margin-right: 5px;"/>
-				<h:inputText value="" id="numero" size="12" maxlength="9"/>
-			</h:panelGrid>
-			
-			<h:outputLabel value="CEP:" for="cep" />
-			<h:inputText value="" id="cep" />
-			
-			<h:outputLabel value="Endereço:" for="endereco" />
-			<h:inputText value="" id="endereco" />
-			
-			<h:outputLabel value="N°:" for="numeroCasa" />
-			<h:inputText value="" id="numeroCasa" />
-			
-			<h:outputLabel value="Complemento:" for="complemento" />
-			<h:inputText value="" id="complemento" />
-			
-			<h:outputLabel value="Bairro:" for="bairro" />
-			<h:inputText value="" id="bairro" />
-			
-			<h:outputLabel value="E-mail:" for="email" />
-			<h:inputText value="" id="email" />
-			
-			<h:outputLabel value="Usuário:" for="usuario" />
-			<h:inputText value="" id="usuario" />
-			
-			<h:outputLabel value="Senha:" for="senha" />
-			<h:inputSecret value="" id="senha" />
-			
-			<h:outputLabel value="Confirmar Senha:" for="confirmarSenha" />
-			<h:inputSecret value="" id="confirmarSenha" />
-			
-		</h:panelGrid>
-		
-		<h:commandButton  value="Salvar Dados Pessoais" />
+
+<h:body>
+	<h:form id="cadastro">
+
+		<p:growl id="growl" life="3000" showDetail="true" />
+
+		<p:wizard flowListener="#{cadastroBean.onFlowProcess}">
+
+			<p:tab id="pessoal" title="Pessoal">
+				<p:panel header="Informações Pessoais">
+
+					<p:messages />
+
+					<h:panelGrid columns="2">
+
+						<h:outputLabel value="Nome Completo:" for="nome" />
+						<h:inputText value="#{cadastroBean.pessoa.nomeCompleto}" id="nome" />
+
+						<h:outputLabel value="Cidade:" for="cidade" />
+						<h:inputText value="#{cadastroBean.pessoa.cidade}" id="cidade" />
+
+						<h:outputLabel value="Estado:" for="estado" />
+						<h:selectOneMenu value="#{cadastroBean.pessoa.estado}" id="estado">
+							<f:selectItem itemLabel="Selecione o estado" itemValue="" />
+							<f:selectItem itemLabel="Ceará" itemValue="CE" />
+							<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ" />
+							<f:selectItem itemLabel="São Paulo" itemValue="SP" />
+						</h:selectOneMenu>
+
+						<h:outputLabel value="Nascimento:" for="nascimento" />
+						<h:inputText value="#{cadastroBean.pessoa.nascimento}"
+							id="nascimento" converter="javax.faces.DateTime" />
+
+						<h:outputLabel value="Sexo:" for="sexo" />
+						<h:selectOneRadio value="#{cadastroBean.pessoa.sexo}" id="sexo">
+							<f:selectItem itemLabel="Masculino" itemValue="m" />
+							<f:selectItem itemLabel="Feminino" itemValue="f" />
+						</h:selectOneRadio>
+
+						<h:outputLabel value="Estado Civil:" for="estadoCivil" />
+						<h:selectOneMenu value="#{cadastroBean.pessoa.estadoCivil}"
+							id="estadoCivil">
+							<f:selectItem itemLabel="Selecione o estado civil" itemValue="" />
+							<f:selectItem itemLabel="Solteiro(a)" itemValue="solteiro(a)" />
+							<f:selectItem itemLabel="Casado(a)" itemValue="casado(a)" />
+							<f:selectItem itemLabel="União Estável" itemValue="união estável" />
+							<f:selectItem itemLabel="Divorciado(a)" itemValue="divorciado(a)" />
+							<f:selectItem itemLabel="Viúvo(a)" itemValue="viúvo(a)" />
+						</h:selectOneMenu>
+
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+
+			<p:tab id="Endereco" title="Endereço">
+				<p:panel header="Detalhes do Endereço">
+
+					<p:messages />
+
+					<h:panelGrid columns="2">
+
+						<h:outputLabel value="CEP:" for="cep" />
+						<h:inputText value="#{cadastroBean.pessoa.cep}" id="cep"
+							maxlength="8" />
+
+						<h:outputLabel value="Endereço:" for="endereco" />
+						<h:inputText value="#{cadastroBean.pessoa.endereco}" id="endereco" />
+
+						<h:outputLabel value="N°:" for="numeroCasa" />
+						<h:inputText value="#{cadastroBean.pessoa.numero}" id="numeroCasa" />
+
+						<h:outputLabel value="Complemento:" for="complemento" />
+						<h:inputText value="#{cadastroBean.pessoa.complemento}"
+							id="complemento" />
+
+						<h:outputLabel value="Bairro:" for="bairro" />
+						<h:inputText value="#{cadastroBean.pessoa.bairro}" id="bairro" />
+
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+
+			<p:tab id="contato" title="Contato">
+				<p:panel header="Informações do contato">
+
+					<p:messages />
+
+					<h:panelGrid columns="2">
+
+						<h:outputLabel value="Telefone:" for="telefone" />
+						<h:panelGrid id="telefone" columns="2" cellspacing="0"
+							cellpadding="0">
+							<h:inputText value="#{cadastroBean.pessoa.telefone.ddd}" id="ddd"
+								size="1" maxlength="2" style="margin-right: 3px;" />
+							<h:inputText value="#{cadastroBean.pessoa.telefone.numero}"
+								id="numero" size="14" maxlength="9" />
+						</h:panelGrid>
+
+						<h:outputLabel value="E-mail:" for="email" />
+						<h:inputText value="#{cadastroBean.pessoa.email}" id="email" />
+
+						<h:outputLabel value="Usuário:" for="usuario" />
+						<h:inputText value="#{cadastroBean.pessoa.usuario}" id="usuario" />
+
+						<h:outputLabel value="Senha:" for="senha" />
+						<h:inputSecret value="#{cadastroBean.pessoa.senha}" id="senha" />
+
+						<h:outputLabel value="Confirmar Senha:" for="confirmarSenha" />
+						<h:inputSecret value="#{cadastroBean.pessoa.senha}"
+							id="confirmarSenha" />
+
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+
+			<p:tab id="confirmacao" title="Confirmação">
+				<p:panel header="Verifique seus dados">
+					<h:panelGrid id="confirm" columns="3">
+						<h:panelGrid columns="2">
+
+							<h:outputLabel value="Nome Completo:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.nomeCompleto}" />
+
+							<h:outputLabel value="Cidade:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.cidade}" />
+
+							<h:outputLabel value="Estado:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.estado}" />
+
+							<h:outputLabel value="Nascimento:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.nascimento}" />
+
+							<h:outputLabel value="Sexo:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.sexo}" />
+
+							<h:outputLabel value="Estado Civil:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.estadoCivil}" />
+
+						</h:panelGrid>
+
+						<h:panelGrid columns="2">
+
+							<h:outputLabel value="CEP:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.cep}" />
+
+							<h:outputLabel value="Endereço:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.endereco}" />
+
+							<h:outputLabel value="N°:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.numero}" />
+
+							<h:outputLabel value="Complemento:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.complemento}" />
+
+							<h:outputLabel value="Bairro:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.bairro}" />
+
+						</h:panelGrid>
+
+						<h:panelGrid columns="2">
+
+							<h:outputLabel value="Telefone:" />
+								<h:panelGrid columns="2">
+									<h:outputLabel value="( #{cadastroBean.pessoa.telefone.ddd} ) " />
+									<h:outputLabel value="#{cadastroBean.pessoa.telefone.numero}" />
+								</h:panelGrid>
+
+							<h:outputLabel value="E-mail:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.email}" />
+
+							<h:outputLabel value="Usuário:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.usuario}" />
+
+							<h:outputLabel value="Senha:" />
+							<h:outputLabel value="#{cadastroBean.pessoa.senha}" />
+
+						</h:panelGrid>
+					</h:panelGrid>
+					<p:commandButton actionListener="#{cadastroBean.salvar}" value="Salvar Dados Pessoais" update="growl" />
+				</p:panel>
+			</p:tab>
+		</p:wizard>
 	</h:form>
-</h:body> 
+</h:body>
 </html>
