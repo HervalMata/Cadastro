@@ -14,7 +14,7 @@ import org.primefaces.event.FlowEvent;
 
 import br.fpl.dev.beans.Pessoa;
 import br.fpl.dev.utils.CidadeUtil;
-import br.fpl.dev.utils.Estados;
+import br.fpl.dev.utils.EstadoUtil;
 
 @Named
 @ViewScoped
@@ -22,7 +22,7 @@ public class CadastroBean implements Serializable {
 
 	private Pessoa pessoa;
 
-	private List<String> estados = Estados.getEstadoList();
+	private List<String> estados = EstadoUtil.getEstadoList();
 	
 	private List<String> cidades;
 
