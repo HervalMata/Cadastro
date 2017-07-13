@@ -6,6 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+<title>Cadastro completo</title>
 </h:head>
 
 <h:body>
@@ -18,44 +19,56 @@
 			<p:tab id="pessoal" title="Pessoal">
 				<p:panel header="Informações Pessoais">
 
-					<p:messages />
+					<p:messages autoUpdate="true" />
 
 					<h:panelGrid columns="2">
+					
+						<p:outputLabel value="Nome Completo:" for="nome" />
+						<p:inputText value="#{cadastroBean.pessoa.nomeCompleto}" id="nome" 
+						required="true" requiredMessage="O campo 'Nome Completo' é obrigatório."
+						validator="nomeCompletoValidator" >
+							<p:keyFilter regEx="/[a-záàâãéèêíïóôõöúçñ ]/i" />
+						</p:inputText>
+						
+						<p:outputLabel value="Estado: " for="estado"/>
+						<p:selectOneMenu value="#{cadastroBean.pessoa.estado}" id="estado"
+							 required="true" requiredMessage="Selecione um 'Estado' válido.">
+						 	
+							<f:selectItem itemLabel="Selecione o estado" itemValue="#{null}" itemDisabled="true"/>
+							<f:selectItems value="#{cadastroBean.estados}" var="estado" 
+								itemLabel="#{estado}" itemValue="#{estado}"/>
+							<p:ajax/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Cidade:" for="cidade" />
+						<p:autoComplete value="#{cadastroBean.pessoa.cidade}" completeMethod="#{cadastroBean.completeText}" id="cidade" 
+							required="true" requiredMessage="O campo 'Cidade' é obrigatório."
+							validator="#{validatorBean.cidadeValidator}"/>
+						
+						<p:outputLabel value="Nascimento:" for="nascimento" />
+						<p:inputMask value="#{cadastroBean.pessoa.nascimento}"
+							id="nascimento" mask="99/99/9999"
+							required="true" requiredMessage="O campo 'Nascimento' é obrigatório." 
+							converter="javax.faces.DateTime" converterMessage="Data de nascimento inválida."/>
 
-						<h:outputLabel value="Nome Completo:" for="nome" />
-						<h:inputText value="#{cadastroBean.pessoa.nomeCompleto}" id="nome" />
-
-						<h:outputLabel value="Cidade:" for="cidade" />
-						<h:inputText value="#{cadastroBean.pessoa.cidade}" id="cidade" />
-
-						<h:outputLabel value="Estado:" for="estado" />
-						<h:selectOneMenu value="#{cadastroBean.pessoa.estado}" id="estado">
-							<f:selectItem itemLabel="Selecione o estado" itemValue="" />
-							<f:selectItem itemLabel="Ceará" itemValue="CE" />
-							<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ" />
-							<f:selectItem itemLabel="São Paulo" itemValue="SP" />
-						</h:selectOneMenu>
-
-						<h:outputLabel value="Nascimento:" for="nascimento" />
-						<h:inputText value="#{cadastroBean.pessoa.nascimento}"
-							id="nascimento" converter="javax.faces.DateTime" />
-
-						<h:outputLabel value="Sexo:" for="sexo" />
-						<h:selectOneRadio value="#{cadastroBean.pessoa.sexo}" id="sexo">
+						<p:outputLabel value="Sexo:" for="sexo" />
+						<p:selectOneRadio value="#{cadastroBean.pessoa.sexo}" id="sexo"
+							required="true"  requiredMessage="Escolha o seu 'Sexo'.">
 							<f:selectItem itemLabel="Masculino" itemValue="m" />
 							<f:selectItem itemLabel="Feminino" itemValue="f" />
-						</h:selectOneRadio>
+						</p:selectOneRadio>
 
-						<h:outputLabel value="Estado Civil:" for="estadoCivil" />
-						<h:selectOneMenu value="#{cadastroBean.pessoa.estadoCivil}"
-							id="estadoCivil">
-							<f:selectItem itemLabel="Selecione o estado civil" itemValue="" />
+						<p:outputLabel value="Estado Civil:" for="estadoCivil" />
+						<p:selectOneMenu value="#{cadastroBean.pessoa.estadoCivil}"
+							id="estadoCivil" 
+							required="true" requiredMessage="Selecione um 'Estado Civil' válido.">
+							<f:selectItem itemLabel="Selecione o estado civil" itemValue="#{null}" itemDisabled="true" />
 							<f:selectItem itemLabel="Solteiro(a)" itemValue="solteiro(a)" />
 							<f:selectItem itemLabel="Casado(a)" itemValue="casado(a)" />
 							<f:selectItem itemLabel="União Estável" itemValue="união estável" />
 							<f:selectItem itemLabel="Divorciado(a)" itemValue="divorciado(a)" />
 							<f:selectItem itemLabel="Viúvo(a)" itemValue="viúvo(a)" />
-						</h:selectOneMenu>
+						</p:selectOneMenu>
 
 					</h:panelGrid>
 				</p:panel>
@@ -68,22 +81,22 @@
 
 					<h:panelGrid columns="2">
 
-						<h:outputLabel value="CEP:" for="cep" />
-						<h:inputText value="#{cadastroBean.pessoa.cep}" id="cep"
+						<p:outputLabel value="CEP:" for="cep" />
+						<p:inputText value="#{cadastroBean.pessoa.cep}" id="cep"
 							maxlength="8" />
 
-						<h:outputLabel value="Endereço:" for="endereco" />
-						<h:inputText value="#{cadastroBean.pessoa.endereco}" id="endereco" />
+						<p:outputLabel value="Endereço:" for="endereco" />
+						<p:inputText value="#{cadastroBean.pessoa.endereco}" id="endereco" />
 
-						<h:outputLabel value="N°:" for="numeroCasa" />
-						<h:inputText value="#{cadastroBean.pessoa.numero}" id="numeroCasa" />
+						<p:outputLabel value="N°:" for="numeroCasa" />
+						<p:inputText value="#{cadastroBean.pessoa.numero}" id="numeroCasa" />
 
-						<h:outputLabel value="Complemento:" for="complemento" />
-						<h:inputText value="#{cadastroBean.pessoa.complemento}"
+						<p:outputLabel value="Complemento:" for="complemento" />
+						<p:inputText value="#{cadastroBean.pessoa.complemento}"
 							id="complemento" />
 
-						<h:outputLabel value="Bairro:" for="bairro" />
-						<h:inputText value="#{cadastroBean.pessoa.bairro}" id="bairro" />
+						<p:outputLabel value="Bairro:" for="bairro" />
+						<p:inputText value="#{cadastroBean.pessoa.bairro}" id="bairro" />
 
 					</h:panelGrid>
 				</p:panel>
@@ -96,25 +109,25 @@
 
 					<h:panelGrid columns="2">
 
-						<h:outputLabel value="Telefone:" for="telefone" />
+						<p:outputLabel value="Telefone:" for="telefone" />
 						<h:panelGrid id="telefone" columns="2" cellspacing="0"
 							cellpadding="0">
-							<h:inputText value="#{cadastroBean.pessoa.telefone.ddd}" id="ddd"
+							<p:inputText value="#{cadastroBean.pessoa.telefone.ddd}" id="ddd"
 								size="1" maxlength="2" style="margin-right: 3px;" />
-							<h:inputText value="#{cadastroBean.pessoa.telefone.numero}"
+							<p:inputText value="#{cadastroBean.pessoa.telefone.numero}"
 								id="numero" size="14" maxlength="9" />
 						</h:panelGrid>
 
-						<h:outputLabel value="E-mail:" for="email" />
-						<h:inputText value="#{cadastroBean.pessoa.email}" id="email" />
+						<p:outputLabel value="E-mail:" for="email" />
+						<p:inputText value="#{cadastroBean.pessoa.email}" id="email" />
 
-						<h:outputLabel value="Usuário:" for="usuario" />
-						<h:inputText value="#{cadastroBean.pessoa.usuario}" id="usuario" />
+						<p:outputLabel value="Usuário:" for="usuario" />
+						<p:inputText value="#{cadastroBean.pessoa.usuario}" id="usuario" />
 
-						<h:outputLabel value="Senha:" for="senha" />
+						<p:outputLabel value="Senha:" for="senha" />
 						<h:inputSecret value="#{cadastroBean.pessoa.senha}" id="senha" />
 
-						<h:outputLabel value="Confirmar Senha:" for="confirmarSenha" />
+						<p:outputLabel value="Confirmar Senha:" for="confirmarSenha" />
 						<h:inputSecret value="#{cadastroBean.pessoa.senha}"
 							id="confirmarSenha" />
 
@@ -127,61 +140,61 @@
 					<h:panelGrid id="confirm" columns="3">
 						<h:panelGrid columns="2">
 
-							<h:outputLabel value="Nome Completo:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.nomeCompleto}" />
+							<p:outputLabel value="Nome Completo:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.nomeCompleto}" />
 
-							<h:outputLabel value="Cidade:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.cidade}" />
+							<p:outputLabel value="Cidade:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.cidade}" />
 
-							<h:outputLabel value="Estado:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.estado}" />
+							<p:outputLabel value="Estado:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.estado}" />
 
-							<h:outputLabel value="Nascimento:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.nascimento}" />
+							<p:outputLabel value="Nascimento:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.nascimento}" />
 
-							<h:outputLabel value="Sexo:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.sexo}" />
+							<p:outputLabel value="Sexo:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.sexo}" />
 
-							<h:outputLabel value="Estado Civil:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.estadoCivil}" />
-
-						</h:panelGrid>
-
-						<h:panelGrid columns="2">
-
-							<h:outputLabel value="CEP:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.cep}" />
-
-							<h:outputLabel value="Endereço:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.endereco}" />
-
-							<h:outputLabel value="N°:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.numero}" />
-
-							<h:outputLabel value="Complemento:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.complemento}" />
-
-							<h:outputLabel value="Bairro:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.bairro}" />
+							<p:outputLabel value="Estado Civil:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.estadoCivil}" />
 
 						</h:panelGrid>
 
 						<h:panelGrid columns="2">
 
-							<h:outputLabel value="Telefone:" />
+							<p:outputLabel value="CEP:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.cep}" />
+
+							<p:outputLabel value="Endereço:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.endereco}" />
+
+							<p:outputLabel value="N°:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.numero}" />
+
+							<p:outputLabel value="Complemento:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.complemento}" />
+
+							<p:outputLabel value="Bairro:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.bairro}" />
+
+						</h:panelGrid>
+
+						<h:panelGrid columns="2">
+
+							<p:outputLabel value="Telefone:" />
 								<h:panelGrid columns="2">
-									<h:outputLabel value="( #{cadastroBean.pessoa.telefone.ddd} ) " />
-									<h:outputLabel value="#{cadastroBean.pessoa.telefone.numero}" />
+									<p:outputLabel value="( #{cadastroBean.pessoa.telefone.ddd} ) " />
+									<p:outputLabel value="#{cadastroBean.pessoa.telefone.numero}" />
 								</h:panelGrid>
 
-							<h:outputLabel value="E-mail:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.email}" />
+							<p:outputLabel value="E-mail:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.email}" />
 
-							<h:outputLabel value="Usuário:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.usuario}" />
+							<p:outputLabel value="Usuário:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.usuario}" />
 
-							<h:outputLabel value="Senha:" />
-							<h:outputLabel value="#{cadastroBean.pessoa.senha}" />
+							<p:outputLabel value="Senha:" />
+							<p:outputLabel value="#{cadastroBean.pessoa.senha}" />
 
 						</h:panelGrid>
 					</h:panelGrid>

@@ -3,6 +3,8 @@ package br.fpl.dev.beans;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.fpl.dev.utils.Telefone;
+
 public class Pessoa implements Serializable {
 
 	private String nomeCompleto;
@@ -22,13 +24,9 @@ public class Pessoa implements Serializable {
 	private String senha;
 
 	public Pessoa() { // Constructor
-
+		this.telefone = new Telefone();
 	}
 	
-	public Pessoa(Telefone telefone){ // Custom Constructor
-		this.telefone = telefone;
-	}
-
 	public Pessoa(String nomeCompleto, String cidade, String estado, Date nascimento, char sexo, String estadoCivil,
 			Telefone telefone, int cep, String endereco, int numero, String complemento, String bairro, String email,
 			String usuario, String senha) { // Full Constructor

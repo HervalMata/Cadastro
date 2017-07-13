@@ -1,4 +1,4 @@
-package br.fpl.dev.beans;
+package br.fpl.dev.utils;
 
 public class Telefone {
 	
