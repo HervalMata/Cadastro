@@ -26,8 +26,9 @@ public class ValidatorBean implements Serializable { // Para validações com in
 		String cidade = (String) o;
 
 		List<String> cidades = CidadeUtil.cidadesPorEstado(cadastro.getPessoa().getEstado());
-
-		if (!(cidades.contains(cidade))) {
+		// Busca as cidades pelo estado passado por parametro
+		
+		if (!(cidades.contains(cidade))) { // Se a cidade informada no campo não pertencer ao estado, exibe a mensagem de erro
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"'" + cidade + "' não pertence ao 'Estado' selecionado.", "");
 			throw new ValidatorException(msg);

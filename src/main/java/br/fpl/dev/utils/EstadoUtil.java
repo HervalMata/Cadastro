@@ -4,6 +4,11 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Armazena os estados que serão utilizados no select
+ * @author Lucas
+ *
+ */
 public class EstadoUtil {
 	
 	private static List<String> estadoList = asList("Acre", 

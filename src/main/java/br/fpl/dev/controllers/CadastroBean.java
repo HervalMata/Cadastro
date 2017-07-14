@@ -22,7 +22,7 @@ public class CadastroBean implements Serializable {
 
 	private Pessoa pessoa;
 
-	private List<String> estados = EstadoUtil.getEstadoList();
+	private List<String> estados = EstadoUtil.getEstadoList(); // Busca os estados da lista
 	
 	private List<String> cidades;
 
@@ -30,7 +30,12 @@ public class CadastroBean implements Serializable {
 	public void init() {
 		pessoa = new Pessoa();
 	}
-
+	
+	/**
+	 * AutoComplete para cidades, baseando-se no estado selecionado
+	 * @param query
+	 * @return cidades com a mesma letra
+	 */
 	public List<String> completeText(String query) {
 		List<String> cidadesFiltradas = new ArrayList<>();
 		
@@ -50,7 +55,10 @@ public class CadastroBean implements Serializable {
 
 		return cidadesFiltradas;
 	}
-
+	
+	/**
+	 * Exibe a mensagem de pessoa cadastrada
+	 */
 	public void salvar() {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
 				pessoa.getNomeCompleto() + " Cadastrado com sucesso!"));

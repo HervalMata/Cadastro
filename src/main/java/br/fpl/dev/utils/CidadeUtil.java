@@ -4,8 +4,15 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Armazena as cidades que serão utilizadas no autoComplete
+ * @author Lucas
+ *
+ */
 public class CidadeUtil {
 	
+	
+	//Apenas 3 foram armazenadas para utilização como exemplo
 	public static List<String> cidadesPorEstado(String estado){
 		
 		if (estado.equals("Acre")){
